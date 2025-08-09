@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #141414;
+            color: #ffffff;
+        }
+        .hero-gradient {
+            background-image: linear-gradient(to top, rgba(20, 20, 20, 1) 10%, rgba(20, 20, 20, 0) 50%, rgba(20, 20, 20, 1) 100%);
+        }
+        .carousel-container {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        }
+        .carousel-container::-webkit-scrollbar {
+            display: none; /* Safari and Chrome */
+        }
+        .movie-card:hover .movie-details {
+            opacity: 1;
+        }
+        .movie-card:hover img {
+            transform: scale(1.05);
+        }
+        .hero-text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
+        }
+        .carousel-wrapper {
+            position: relative;
+        }
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .carousel-wrapper:hover .carousel-arrow {
+            opacity: 1;
+        }
+        .carousel-arrow.left {
+            left: 10px;
+        }
+        .carousel-arrow.right {
+            right: 10px;
+        }
+        .skeleton {
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-40 transition-colors duration-300 ease-in-out px-4 md:px-16 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-8">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo" class="h-6 md:h-8">
+            <nav class="hidden md:flex items-center space-x-4">
+                <a href="#" class="text-white font-semibold hover:text-gray-300 transition">Home</a>
+                <a href="#" class="text-white hover:text-gray-300 transition">TV Shows</a>
+                <a href="#" class="text-white hover:text-gray-300 transition">Movies</a>
+                <a href="#" class="text-white hover:text-gray-300 transition">New & Popular</a>
+                <a href="#" class="text-white hover:text-gray-300 transition">My List</a>
+            </nav>
+        </div>
+        <div class="flex items-center space-x-4">
+            <i class="fas fa-search text-white text-xl cursor-pointer"></i>
+            <i class="fas fa-bell text-white text-xl cursor-pointer"></i>
+            <img src="https://placehold.co/32x32/E84A5F/white?text=U" alt="User Profile" class="h-8 w-8 rounded">
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="relative h-[56.25vw] min-h-[400px] max-h-[800px] w-full">
+            <div class="absolute inset-0">
+                <img id="hero-image" src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Featured Movie">
+                <div class="absolute inset-0 hero-gradient"></div>
+            </div>
+            <div class="relative z-10 flex flex-col justify-center h-full px-4 md:px-16 text-white w-full md:w-2/5">
+                <h1 id="hero-title" class="text-3xl md:text-5xl font-extrabold leading-tight hero-text-shadow">The Future of Cinema</h1>
+                <p id="hero-description" class="mt-4 text-sm md:text-lg hero-text-shadow">A mind-bending journey through time and space. Witness the impossible, defy reality, and discover what lies beyond the veil of perception.</p>
+                <div class="flex space-x-4 mt-6">
+                    <button class="flex items-center bg-white text-black font-bold px-6 py-2 rounded hover:bg-gray-200 transition">
+                        <i class="fas fa-play mr-2"></i> Play
+                    </button>
+                    <button class="flex items-center bg-gray-700 bg-opacity-70 text-white font-bold px-6 py-2 rounded hover:bg-gray-600 transition">
+                        <i class="fas fa-info-circle mr-2"></i> More Info
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Movie Carousels -->
+        <div class="px-4 md:px-16 py-8 space-y-12">
+            <!-- Dynamic Carousel Sections -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="px-4 md:px-16 py-8 mt-16 border-t border-gray-800">
+        <div class="max-w-5xl mx-auto text-gray-400">
+            <div class="flex space-x-4 mb-4">
+                <i class="fab fa-facebook-f text-2xl cursor-pointer hover:text-white"></i>
+                <i class="fab fa-instagram text-2xl cursor-pointer hover:text-white"></i>
+                <i class="fab fa-twitter text-2xl cursor-pointer hover:text-white"></i>
+                <i class="fab fa-youtube text-2xl cursor-pointer hover:text-white"></i>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <a href="#" class="hover:text-white">Audio Description</a>
+                <a href="#" class="hover:text-white">Help Center</a>
+                <a href="#" class="hover:text-white">Gift Cards</a>
+                <a href="#" class="hover:text-white">Media Center</a>
+                <a href="#" class="hover:text-white">Investor Relations</a>
+                <a href="#" class="hover:text-white">Jobs</a>
+                <a href="#" class="hover:text-white">Terms of Use</a>
+                <a href="#" class="hover:text-white">Privacy</a>
+                <a href="#" class="hover:text-white">Legal Notices</a>
+                <a href="#" class="hover:text-white">Cookie Preferences</a>
+                <a href="#" class="hover:text-white">Corporate Information</a>
+                <a href="#" class="hover:text-white">Contact Us</a>
+            </div>
+            <p class="text-xs mt-8">&copy; 1997-2025 Netflix, Inc.</p>
+        </div>
+    </footer>
+
+    <script>
+        const PEXELS_API_KEY = 'YzMa6nYlgBTZEXAQyUX9Qpu0jQNlCUNXQwgYPMZbAAKVWbcKwS35bl5N';
+        const mainContent = document.querySelector('.px-4.md\\:px-16.py-8.space-y-12');
+
+        // Sticky Header
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('bg-[#141414]', window.scrollY > 50);
+        });
+
+        async function fetchMovieImages(query, perPage = 15) {
+            if (PEXELS_API_KEY === 'YOUR_PEXELS_API_KEY') {
+                 console.error("Pexels API Key is not set.");
+                 return [];
+            }
+            const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=${perPage}&orientation=portrait`;
+            try {
+                const response = await fetch(url, { headers: { Authorization: PEXELS_API_KEY } });
+                if (!response.ok) throw new Error(`Pexels API error: ${response.status}`);
+                const data = await response.json();
+                return data.photos.map(photo => ({
+                    title: photo.alt || 'Movie Poster',
+                    img: photo.src.large,
+                    description: `A captivating image titled "${photo.alt}".`
+                }));
+            } catch (error) {
+                console.error(`Failed to fetch images for "${query}":`, error);
+                return [];
+            }
+        }
+
+        function createMovieCard(movie) {
+            return `
+                <div class="movie-card flex-shrink-0 w-1/3 md:w-1/5 lg:w-[13%] rounded-md overflow-hidden relative cursor-pointer group transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:z-10">
+                    <img src="${movie.img}" alt="${movie.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/400x600/141414/ffffff?text=Image+Error';">
+                    <div class="movie-details absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 flex flex-col justify-end p-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <h3 class="font-bold text-base whitespace-normal">${movie.title}</h3>
+                        <div class="flex space-x-2 mt-2">
+                            <i class="fas fa-play-circle text-2xl text-white hover:text-red-600"></i>
+                            <i class="fas fa-plus-circle text-2xl text-white hover:text-red-600"></i>
+                            <i class="fas fa-thumbs-up text-2xl text-white hover:text-red-600"></i>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function createSkeletonCard() {
+            return `
+                <div class="flex-shrink-0 w-1/3 md:w-1/5 lg:w-[13%] rounded-md h-64 md:h-80 skeleton"></div>
+            `;
+        }
+
+        function createCarousel(id, title, movies) {
+            const section = document.createElement('section');
+            section.innerHTML = `
+                <h2 class="text-xl font-bold mb-4">${title}</h2>
+                <div class="carousel-wrapper">
+                    <div id="${id}" class="carousel-container flex overflow-x-auto space-x-4 pb-4 scroll-smooth">
+                        ${movies.map(createMovieCard).join('')}
+                    </div>
+                    <div class="carousel-arrow left"><i class="fas fa-chevron-left"></i></div>
+                    <div class="carousel-arrow right"><i class="fas fa-chevron-right"></i></div>
+                </div>
+            `;
+            mainContent.appendChild(section);
+            
+            const carousel = section.querySelector('.carousel-container');
+            const leftArrow = section.querySelector('.left');
+            const rightArrow = section.querySelector('.right');
+
+            leftArrow.addEventListener('click', () => {
+                carousel.scrollBy({ left: -carousel.clientWidth, behavior: 'smooth' });
+            });
+            rightArrow.addEventListener('click', () => {
+                carousel.scrollBy({ left: carousel.clientWidth, behavior: 'smooth' });
+            });
+        }
+        
+        function createSkeletonCarousel(title) {
+            const section = document.createElement('section');
+            section.innerHTML = `
+                <h2 class="text-xl font-bold mb-4">${title}</h2>
+                <div class="flex overflow-x-hidden space-x-4 pb-4">
+                    ${Array(7).fill(0).map(createSkeletonCard).join('')}
+                </div>
+            `;
+            return section;
+        }
+
+        async function populatePage() {
+            const carouselsConfig = {
+                'trending': 'Trending Now',
+                'popular': 'Popular on Netflix',
+                'action': 'Action & Adventure',
+                'scifi': 'Sci-Fi & Fantasy',
+            };
+            
+            // Show skeleton loaders
+            mainContent.innerHTML = '';
+            for (const key in carouselsConfig) {
+                mainContent.appendChild(createSkeletonCarousel(carouselsConfig[key]));
+            }
+
+            // Fetch hero image
+            const heroMovies = await fetchMovieImages('Epic Movie Scene', 1);
+            if (heroMovies.length > 0) {
+                document.getElementById('hero-image').src = heroMovies[0].img;
+                document.getElementById('hero-title').textContent = heroMovies[0].title;
+                document.getElementById('hero-description').textContent = heroMovies[0].description;
+            }
+
+            // Fetch and populate carousels
+            mainContent.innerHTML = ''; // Clear skeletons
+            for (const key in carouselsConfig) {
+                const movies = await fetchMovieImages(carouselsConfig[key].replace(' & ', ' '), 15);
+                if(movies.length > 0) {
+                    createCarousel(`${key}-carousel`, carouselsConfig[key], movies);
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', populatePage);
+    </script>
+</body>
+</html>
